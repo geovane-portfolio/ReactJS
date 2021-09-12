@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 import Categoria from './pages/Categoria';
+import Login from './pages/Login';
 
 /*function BemVindo(props) {
   return <h1>Olá, {props.nome}! Você tem {props.idade} anos.</h1>;
@@ -521,6 +522,9 @@ function App() {
             <li>
               <Link to="/categoria/viagem">Viagem</Link>
             </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         </nav>
       </header>
@@ -538,6 +542,10 @@ function App() {
 
         <Route path="/categoria/:cat">
           <Categoria />
+        </Route>
+
+        <Route path="/login">
+          <Login />
         </Route>
 
         <Route path="*">

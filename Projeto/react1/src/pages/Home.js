@@ -1,9 +1,15 @@
 import React from "react";
 import {  useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-function Home(props) {
+function Home() {// remover props
     let history = useHistory();
+
+    const dispatch = useDispatch();
+
+    // Uso moderno, sem precisar das props
+    const name = useSelector(state => state.usuario.name);
+    const contador = useSelector(state => state.usuario.contador);
 
     const handleButton = () => {
         setTimeout(() => {
@@ -12,19 +18,27 @@ function Home(props) {
     };
     
     const handleGeovane = () => {
-        props.setName('Geovane');
+       // props.setName('Geovane');
+       dispatch({
+           type: 'SET_NAME',
+           payload: { name: 'Geovane' }
+       });
     };
     
     const handleIncrement = () => {
-        props.increment();
+       // props.increment();
+       dispatch({
+           type: 'INCREMENT_CONTADOR'
+       });
     };
 
     return (
         <div>
             <h4>Página Home</h4>
 
-            NOME: {props.name}<br/>
-            CONTAGEM: {props.contador}<br/><br/>
+            {/* NOME: {props.name}<br/> remover props*/}
+            NOME: {name}<br/>
+            CONTAGEM: {contador}<br/><br/>
 
             <button onClick={handleGeovane}>Setar Nome para Geovane</button>
             <button onClick={handleIncrement}>+1</button>
@@ -34,6 +48,8 @@ function Home(props) {
         </div>
     );
 }
+
+/*  Método antigo *trocar o useSelector por 'connect' sem props
 
 const mapStateToProps = (state) => {
     return {
@@ -59,3 +75,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
+*/
+
+export default Home;
